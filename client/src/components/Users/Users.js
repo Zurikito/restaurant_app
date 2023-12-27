@@ -41,6 +41,11 @@ const Users = () => {
         navigate('/users/add');
     };
 
+    const handleGoBack = () => {
+        // Go back to the previous page
+        window.history.back();
+    };
+
     const filteredUsers = users.filter(user =>
         user.username.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -51,18 +56,18 @@ const Users = () => {
                 <h1>List of Users</h1>
             </div>
             <div className="container">
-
-                <div className="container">
-                    <input
-                        type="text"
-                        placeholder="Search user..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="form-control mt-3 mb-3"
-                        style={{ width: '200px', height: '30px' }}
-                    />                
-                </div>
-
+                {/* Search input */}
+                <input
+                    type="text"
+                    placeholder="Search user..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="form-control mt-3 mb-3"
+                    style={{ width: '200px', height: '30px' }}
+                />
+            </div>
+            <div className="container">
+                {/* Table */}
                 <table className="table mt-4">
                     <thead>
                         <tr>
@@ -79,10 +84,10 @@ const Users = () => {
                                 <td style={{ borderLeft: '1px solid #dee2e6' }}>{item.username}</td>
                                 <td style={{ borderLeft: '1px solid #dee2e6' }}>{item.role}</td>
                                 <td style={{ justifyContent: 'center', borderLeft: '1px solid #dee2e6', borderRight: '1px solid #dee2e6' }}>
-                                    <button className='btn btn-success' style={{ marginRight: '10px' }} onClick={() => handleEditUser(item.id)}>
+                                    <button className='btn btn-success' style={{ margin: '0 5px' }} onClick={() => handleEditUser(item.id)}>
                                         Edit
                                     </button>
-                                    <button className='btn btn-danger' style={{ marginLeft: '10px' }} onClick={() => handleDeleteUser(item.id)}>
+                                    <button className='btn btn-danger' style={{ margin: '0 5px' }} onClick={() => handleDeleteUser(item.id)}>
                                         Delete
                                     </button>
                                 </td>
@@ -91,9 +96,17 @@ const Users = () => {
                     </tbody>
                 </table>
             </div>
-            <button className='btn btn-primary' onClick={() => handleAddUser()}>
-                Add User
-            </button>
+            <div className="container text-center">
+                {/* Buttons below the table, centered with margin */}
+                <div className="d-inline-block">
+                    <button className="btn btn-secondary" style={{ margin: '0 5px' }} onClick={handleGoBack}>
+                        Go Back
+                    </button>
+                    <button className='btn btn-primary' style={{ margin: '0 5px' }} onClick={() => handleAddUser()}>
+                        Add User
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }
