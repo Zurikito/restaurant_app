@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/config';
 
 const Deletingitem = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const Deletingitem = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/menu/${_id}`);
+        const response = await axios.get(`${API_BASE_URL}/api/menu/${_id}`);
         setItemData(response.data.data);
       } catch (error) {
         console.error('Error fetching item:', error.message);
@@ -32,7 +33,7 @@ const Deletingitem = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:5000/api/menu/delete/${_id}`, {
+      const response = await axios.post(`${API_BASE_URL}/api/menu/delete/${_id}`, {
         role: {
           role_type: 'admin'
         }
@@ -41,7 +42,7 @@ const Deletingitem = () => {
       setDeleteMessage('Item deleted successfully! Redirecting to menu...');
       setTimeout(() => {
         navigate('/menu');
-      }, 5000);
+      }, 5001);
     } catch (error) {
       console.error('Error deleting item:', error.message);
       setDeleteMessage('Error deleting item. Please try again.');

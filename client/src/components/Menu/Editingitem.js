@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/config';
 
 const Editingitem = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const Editingitem = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/menu/${_id}`);
+        const response = await axios.get(`${API_BASE_URL}/api/menu/${_id}`);
         setItemData(response.data.data);
         console.log(response)
       } catch (error) {
@@ -40,7 +41,7 @@ const Editingitem = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:5000/api/menu/edit/${_id}`, {
+      const response = await axios.post(`${API_BASE_URL}/api/menu/edit/${_id}`, {
         update: {
           name: itemData.name,
           des: itemData.description,
@@ -56,7 +57,7 @@ const Editingitem = () => {
       setUpdateMessage('Item updated successfully! Redirecting to menu...');
       setTimeout(() => {
         navigate('/menu');
-      }, 5000);
+      }, 5001);
     } catch (error) {
       console.error('Error updating item:', error.message);
       setUpdateMessage('Error updating item. Please try again.');

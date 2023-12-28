@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/config';
 
 const Deletinguser = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Deletinguser = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/users/${_id}`);
+        const response = await axios.get(`${API_BASE_URL}/api/users/${_id}`);
         setUserData(response.data.data);
       } catch (error) {
         console.error('Error fetching user:', error.message);
@@ -30,7 +31,7 @@ const Deletinguser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:5000/api/users/delete/${_id}`, {
+      const response = await axios.post(`${API_BASE_URL}/api/users/delete/${_id}`, {
         role: {
           role_type: 'admin'
         }
@@ -39,7 +40,7 @@ const Deletinguser = () => {
       setDeleteMessage('User deleted successfully! Redirecting to users...');
       setTimeout(() => {
         navigate('/users');
-      }, 5000);
+      }, 5001);
     } catch (error) {
       console.error('Error deleting user:', error.message);
       setDeleteMessage('Error deleting user. Please try again.');

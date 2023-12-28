@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/config';
 
 const User = () => {
     const { _id } = useParams();
@@ -9,7 +10,7 @@ const User = () => {
 
     useEffect(() => {
         const getUser = async () => {
-                await axios.get(`http://localhost:5000/api/users/${_id}`)
+                await axios.get(`${API_BASE_URL}/api/users/${_id}`)
                 .then(res => setUser(res.data.data))
         };
 

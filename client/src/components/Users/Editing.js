@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { API_BASE_URL } from '../../config/config';
 
-const Editinguser = () => {
-  const navigate = useNavigate();
+const Editing = () => {
   const { _id } = useParams();
 
   const [userData, setUserData] = useState({
@@ -13,7 +12,7 @@ const Editinguser = () => {
     role: ''
   });
 
-  const [updateMessage, setUpdateMessage] = useState('');
+  console.log(userData)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,39 +34,22 @@ const Editinguser = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(`${API_BASE_URL}/api/users/edit/${_id}`, {
-        update: {
-          user_id: userData.username,
-          user_password: userData.password,
-          user_type: userData.role
-        },
-        role: {
-          role_type: 'admin'
-        }
+    axios.post(`${API_BASE_URL}/api/users/edit/${_id}`, userData)
+      .then(response => {
+        console.log('User data updated successfully:', response.data.data);
+      })
+      .catch(error => {
+        console.error('Error updating user data:', error.message);
       });
-      console.log('User updated successfully:', response.data.data);
-      setUpdateMessage('User updated successfully! Redirecting to users...');
-      setTimeout(() => {
-        navigate('/users');
-      }, 5001);
-    } catch (error) {
-      console.error('Error updating user:', error.message);
-      setUpdateMessage('Error updating user. Please try again.');
-    }
-  };
-
-  const handleCancel = () => {
-    navigate('/users');
   };
 
   return (
     <div className="container mt-4">
       <h3 className="text-left" style={{ textAlign: 'center' }}>Update User Information</h3>
 
-      <form className="container mt-4">
+      <form className="container mt-4" onSubmit={handleSubmit}>
         <div className="form-group row">
           <label htmlFor="username" className="col-sm-4 col-form-label text-left" style={{ textAlign: 'right' }}>Username</label>
           <div className="col-sm-5">
@@ -94,18 +76,12 @@ const Editinguser = () => {
 
         <div className="form-group row">
           <div>
-            <button type="submit" className="btn btn-secondary mt-2" style={{ marginRight: '10px' }} onClick={handleCancel}>Cancel</button>
-            <button type="submit" className="btn btn-primary mt-2" style={{ marginLeft: '10px' }} onClick={handleSubmit}>Save</button>
+            <button type="submit" className="btn btn-primary mt-2">Save</button>
           </div>
         </div>
-        {updateMessage && (
-          <div className="alert alert-success mt-4" role="alert">
-            {updateMessage}
-          </div>
-        )}
       </form>
     </div>
   );
 };
 
-export default Editinguser;
+export default Editing;

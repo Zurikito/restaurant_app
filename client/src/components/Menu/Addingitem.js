@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/config';
 
 const Addingitem = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Addingitem = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/menu/create', {
+      const response = await axios.post(`${API_BASE_URL}/api/menu/create`, {
         item: {
           name: itemData.name,
           des: itemData.description,
@@ -41,7 +42,7 @@ const Addingitem = () => {
       setCreateMessage('Item created successfully! Redirecting to menu...');
       setTimeout(() => {
         navigate('/menu');
-      }, 5000);
+      }, 5001);
     } catch (error) {
       console.error('Error creating item:', error.message);
       setCreateMessage('Error creating item. Please try again.');

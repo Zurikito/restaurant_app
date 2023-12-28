@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config/config';
 
 const Users = () => {
     const navigate = useNavigate();
@@ -10,7 +11,7 @@ const Users = () => {
 
     const getUsers = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/api/users', {
+            const response = await axios.post(`${API_BASE_URL}/api/users`, {
                 role: {
                     role_type: 'admin'
                 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Login = () => {
     };
 
     const handleLogin = () => {
-      navigate('/menu');
+      // navigate('/menu');
     };
   
     return (
@@ -41,7 +42,9 @@ const Login = () => {
   
           <div className="form-group row">
             <div>
+            <Link to="/seating">
               <button type="submit" className="btn btn-primary mt-2" onClick={handleLogin}>Login</button>
+            </Link>
             </div>
           </div>
         </form>
