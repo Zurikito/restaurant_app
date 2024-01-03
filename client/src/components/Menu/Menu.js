@@ -312,12 +312,13 @@ const Menu = () => {
             ))}
           </tbody>
         </table>
-        <Button
+        <button
+          className="btn btn-primary"
           variant="contained"
           onClick={handleAddItem}
         >
           Add Item
-        </Button>
+        </button>
       </div>
     </div>
   );

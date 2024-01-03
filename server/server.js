@@ -46,3 +46,25 @@ await mongoose
         // process.exit(1);
     });
 
+
+
+
+
+
+
+
+
+    const seatingSchema = new mongoose.Schema({
+      // id: {
+      //   type: String,
+      //   required: true,
+      //   unique: true,
+      // },
+      num: {
+        type: Number,
+      },
+    }, { timestamps: true });
+    
+   export const Seating = mongoose.model("Seating", seatingSchema);
+    
+

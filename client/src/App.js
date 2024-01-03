@@ -16,6 +16,7 @@ import Payment from "./components/Bill/Bill.js";
 import { Routes, Route } from "react-router-dom";
 
 import { Helmet } from "react-helmet";
+import Addingtable from "./components/Seating/Addingtable.js";
 
 function App() {
   return (
@@ -148,6 +149,15 @@ function App() {
             <>
               <Header />
               <Seating />
+            </>
+          }
+        />
+        <Route
+          path="/seating/add"
+          element={
+            <>
+              <Header />
+              <Addingtable />
             </>
           }
         />

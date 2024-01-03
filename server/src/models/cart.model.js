@@ -1,22 +1,15 @@
 import mongoose from "mongoose";
 
 const cartSchema = new mongoose.Schema({
-    cart_num: {
-        type: String,
-    },
-
-    food_items: [{
-        id: String,
-        quantity: Number
-    }],
-    
-    drink_items: [{
-        id: String,
-        quantity: Number
-    }],
-
-    cart_status: {
+    item_id: {
         type: String
+    },
+    quantity: {
+        type: Number,
+        default: 1
+    },
+    table_id: {
+        type: Number
     },
 
 }, {timestamps: true});

@@ -1,6 +1,7 @@
 "use strict";
 
 import billModel from "../models/bill.model.js";
+import cartModel from "../models/cart.model.js";
 
 const getBill = async (req, res) => {
     try {
@@ -57,6 +58,7 @@ const createBill = async (req, res) => {
     try {
         const bill = new billModel(req.body.bill);
         await bill.save();
+        await cartModel.deleteMany({});
         const result = {
             id: bill._id.toString(),
             billID: bill.bill_id,
